@@ -62,6 +62,7 @@ app.post("/admin/register", async (req, res) => {
   await SignupData.save();
 
   res.status(200).send({ message: "Successfully registered" });
+
 });
 
 // ADMIN Login
@@ -80,6 +81,12 @@ app.post("/admin/signin", async (req, res) => {
   if (isValid) {
     return res.status(401).send({ message: "Passowrd is Invalid" });
   }
+// JWT Tokens
+const Jwt = require("jsonwebtoken");
+const token = Jwt.
+
+
+
   res.status(200).send({ message: "login successfully" });
 });
 
