@@ -32,8 +32,6 @@ router.post("/post", async (req, res) => {
 // GET all the products by admin
 
 
-
-
 module.exports = {
   ProductRouters: router, // correct export name
 };
