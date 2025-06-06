@@ -38,6 +38,19 @@ router.get("/getproduct", async (req, res) => {
     console.log(err);
   }
 });
+// Get Data
+router.get('/getproduct/:id',async(req,res)=>{
+  try{
+
+  }
+  catch(err){
+    console.log(err,'get data');
+    
+  }
+})
+
+
+
 module.exports = {
   ProductRouters: router, // correct export name
 };
