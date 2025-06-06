@@ -30,8 +30,14 @@ router.post("/post", async (req, res) => {
   res.send({ message: "Received" });
 });
 // GET all the products by admin
-
-
+router.get("/getproduct", async (req, res) => {
+  try {
+    let GetData = await ProductModel.find();
+    res.json(GetData);
+  } catch (err) {
+    console.log(err);
+  }
+});
 module.exports = {
   ProductRouters: router, // correct export name
 };
