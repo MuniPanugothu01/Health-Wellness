@@ -11,11 +11,13 @@ const ProductSchema = new mongoose.Schema({
   Description: String,
   Category: String,
   image: String,
+  Quantity: Number,
 });
 const ProductModel = mongoose.model("Products", ProductSchema);
 
 router.post("/productpost/admin", async (req, res) => {
-  const { productName, Price, Description, Category, image } = req.body;
+  const { productName, Price, Description, Category, image, Quantity } =
+    req.body;
 
   const CreateProduct = new ProductModel({
     productName,
@@ -23,6 +25,7 @@ router.post("/productpost/admin", async (req, res) => {
     Description,
     Category,
     image,
+    Quantity,
   });
   await CreateProduct.save();
 
@@ -74,10 +77,6 @@ router.delete("/productdelete/admin/:id", async (req, res) => {
     res.status(500).send({ message: "try block not working" });
   }
 });
-
-
-
-
 
 module.exports = {
   ProductRouters: router, // correct export name
