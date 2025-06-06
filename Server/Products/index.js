@@ -14,7 +14,7 @@ const ProductSchema = new mongoose.Schema({
 });
 const ProductModel = mongoose.model("Products", ProductSchema);
 
-router.post("/post", async (req, res) => {
+router.post("/productpost/admin", async (req, res) => {
   const { productName, Price, Description, Category, image } = req.body;
 
   const CreateProduct = new ProductModel({
@@ -30,7 +30,7 @@ router.post("/post", async (req, res) => {
   res.send({ message: "Received" });
 });
 // GET all the products by admin
-router.get("/getproduct", async (req, res) => {
+router.get("/getproduct/admin", async (req, res) => {
   try {
     let GetData = await ProductModel.find();
     res.json(GetData);
@@ -39,15 +39,43 @@ router.get("/getproduct", async (req, res) => {
   }
 });
 // Get Data
-router.get('/getproduct/:id',async(req,res)=>{
-  try{
+router.get("/getproduct/admin/:id", async (req, res) => {
+  try {
+    const product = await ProductModel.findById(req.params.id);
+    res.json(product);
+  } catch (err) {
+    res.status(500).send("Error getting product");
+  }
+});
 
+// Edit the product
+router.patch("/productedit/admin/:id", async (req, res) => {
+  try {
+    let EditProduct = await ProductModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        overwrite: true,
+      }
+    );
+    res.send(EditProduct);
+  } catch (err) {
+    res.status(400).send({ message: "not found data" });
   }
-  catch(err){
-    console.log(err,'get data');
-    
+});
+
+// DELETE the  product
+router.delete("/productdelete/admin/:id", async (req, res) => {
+  try {
+    let DeleteProduct = await ProductModel.findByIdAndDelete(req.params.id);
+    res.send(DeleteProduct);
+  } catch (err) {
+    res.status(500).send({ message: "try block not working" });
   }
-})
+});
+
+
 
 
 
