@@ -78,6 +78,18 @@ router.delete("/productdelete/admin/:id", async (req, res) => {
   }
 });
 
+// User
+
+router.get("/user/get", async (req, res) => {
+  // const {}=req.body
+
+  try {
+    let DataGet = await ProductModel.find();
+    res.status(200).json(DataGet);
+  } catch (err) {
+    res.status(500).send({ message: "server error" });
+  }
+});
 module.exports = {
   ProductRouters: router, // correct export name
 };
